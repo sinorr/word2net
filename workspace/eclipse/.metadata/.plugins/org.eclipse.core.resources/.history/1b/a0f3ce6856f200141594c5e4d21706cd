@@ -1,0 +1,46 @@
+package map;
+
+import java.util.HashMap;
+import java.util.Vector;
+
+public class Transfer{
+	
+	Options option;
+	String workPath;
+	String stopFile;
+	String word2vecFile;
+	
+	
+	int size;
+	
+	Vector<String> wordList;
+	HashMap<String,Double[]> word2vec;
+	Wnsense wnsense;
+	
+	//////////////////Methods//////////////////
+	
+	//Constructor
+	public Transfer(){
+		
+	}
+	
+	
+	public boolean transfer(){
+		
+		for (int i = 0; i < wordList.size(); i++){
+			String word = wordList.get(i);
+			Word one = new Word();
+			
+			one.setWsi();
+			one.setWn();
+			one.comDistence();
+			one.saveMatrix();		
+			
+		}
+		
+		
+		
+		return true;
+	}
+	
+}

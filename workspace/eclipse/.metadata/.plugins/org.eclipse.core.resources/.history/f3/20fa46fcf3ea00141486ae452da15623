@@ -1,0 +1,13 @@
+package poster;
+
+public class Corpus{
+	
+	Options option;
+	Dict dict;
+	
+	/////////////////////////////Methods/////////////////////
+	public Corpus(Options option){
+		this.option = option;
+		dict = new Dict(option);
+	}
+}

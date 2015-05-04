@@ -1,0 +1,38 @@
+package map;
+
+public class Word{
+	
+	String word;
+	Double[][] matrix;
+	int high;
+	int width;
+	int[] senseid;
+	
+	Double[][] wsi;
+	Double[][] wn;
+	
+	////////////////////Methods////////////////////
+	
+	// Constructor
+	public Word(){
+		
+	}
+	
+	public void setWsi(){
+		
+	}
+	
+	public void setWn(){
+		
+	}
+	
+	public void comDistence(){
+		
+	}
+	
+	public boolean saveMatrix(){
+		
+		
+		return true;
+	}
+}

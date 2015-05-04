@@ -1,0 +1,7 @@
+package map;
+
+public class Transfer{
+	
+	Options option;
+	
+}

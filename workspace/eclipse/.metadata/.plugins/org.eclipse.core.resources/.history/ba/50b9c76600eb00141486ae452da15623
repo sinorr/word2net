@@ -1,0 +1,111 @@
+package poster;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.Map.Entry;
+import java.util.Vector;
+
+public class Corpus{
+	
+	Options option;
+	Dict dict;
+	Integer length;
+	Integer filterLine;
+	
+	// Path of files
+	String sourceFile;
+	String coreFile;
+	String withOrderFile;
+	String lemmaPath;
+	
+	// Dynamic variables
+	Vector<Entry<String, Integer> > wordVec;
+	String withOrderLine;
+	
+	/////////////////////////////Methods/////////////////////
+	
+	// Constructor
+	public Corpus(Options option){
+		
+		if (!option.workPath.endsWith(File.separator)){
+			option.workPath += File.separator;
+		}
+		this.option = option;
+		length = option.length;
+		filterLine = option.filterLine;
+		
+		// init some path
+		sourceFile = option.workPath + option.sourceFile;
+		coreFile = option.workPath + "core.dat";
+		withOrderFile = option.workPath + "withOrder.dat";
+		lemmaPath = option.workPath + "lemmas/";
+		
+		dict = new Dict(option);
+		wordVec = new Vector<Entry<String, Integer> >();
+		
+		
+	
+	}
+	
+	public boolean init(){
+		
+		System.out.println("Reading Dict starting ... ");
+		dict.readDict();
+		
+		File lemmas = new File(lemmaPath);
+		if (!lemmas.isDirectory()){
+			lemmas.mkdirs();
+		}
+		
+		return true;
+	}
+	
+	public boolean transfer(){
+		try{
+			BufferedReader sourceReader = new BufferedReader(new InputStreamReader(new FileInputStream(sourceFile)));
+			BufferedWriter coreWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(coreFile)));
+			BufferedWriter withOrderWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(withOrderFile)));
+			
+			int counter = 0;
+			String line = sourceReader.readLine();
+			while (line != null){
+				
+				if (judge(line)){
+					saveLemmas(wordVec);
+					coreWriter.write(line);
+					withOrderWriter.write(withOrderLine);
+					if ( length != -1 && ++counter >= length){
+						break;
+					}
+				}				
+				
+				
+				line = sourceReader.readLine();
+			}
+			
+			
+		}catch(Exception e){
+			System.out.println("Error when transfer source !"+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	public boolean judge(String line){
+		wordVec.clear();
+		withOrderLine = "";
+		
+		String [] words = line.split(" ");
+		for (int i = 0; i < words.length; i ++){
+			Entry<String, Integer> temp = dict.contains(words[i]);
+			if (temp != null){
+				wordVec.add(words[i]);
+				withOrderLine += words[i]
+			}
+		}
+	}
+}

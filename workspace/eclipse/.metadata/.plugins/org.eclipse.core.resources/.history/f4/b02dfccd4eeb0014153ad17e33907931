@@ -1,0 +1,21 @@
+package pairup;
+
+import java.util.HashMap;
+
+public class Distri{
+	
+	HashMap<String, Integer> lemmaCount;
+	HashMap<String,String[]> distri;
+	
+	// Path
+	String tmFile;
+	String wordListFile;
+		
+	/////////////////////////Methods//////////////////////////
+	
+	// Constructor
+	public Distri(Options option){
+		tmFile = option.tmFile;
+		wordListFile = option.wo
+	}
+}

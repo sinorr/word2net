@@ -1,0 +1,23 @@
+package map;
+
+import java.util.HashMap;
+import java.util.Vector;
+
+public class Transfer{
+	
+	Options option;
+	
+	int size;
+	
+	Vector<String> wordList;
+	HashMap<String,Double[]> word2vec;
+	Wnsense wnsense;
+	
+	//////////////////Methods//////////////////
+	
+	//Constructor
+	public Transfer(){
+		
+	}
+	
+}

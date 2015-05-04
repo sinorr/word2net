@@ -1,0 +1,26 @@
+package poster;
+
+import org.kohsuke.args4j.*;  //导入包
+
+public class Options{
+	
+	
+	@Option(name = "-workPath", usage = "Specify path of workspace ")
+	public String workPath = "/home/cyno/corpus/large2/";
+	
+	@Option(name = "-sourceFile", usage = "Specify source corpus ")
+	public String sourceFile = "large2.en";
+	
+	@Option(name = "-dictFile", usage = "Specify file of dictionary")
+	public String dictFile = "index.adj";
+	
+	@Option(name = "-length", usage = "Specify the sum of source lines")
+	public Integer length = 100000;
+	
+	@Option(name = "-filterLine", usage = "Specify the least sum of words tagged each line")
+	public Integer filterLine = 4;
+	
+	@Option(name = "-filterLemmaCount", usage = "Specify the least sum of leammas each word")
+	public Integer filterLemmaCount = 10;
+		
+}

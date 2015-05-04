@@ -1,0 +1,7 @@
+package poster;
+
+public class Dict{
+	
+	Options option;
+	
+}

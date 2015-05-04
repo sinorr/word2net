@@ -1,0 +1,20 @@
+package poster;
+
+public class Corpus{
+	
+	Options option;
+	Dict dict;
+	
+	/////////////////////////////Methods/////////////////////
+	public Corpus(Options option){
+		this.option = option;
+		dict = new Dict(option);
+	}
+	
+	public boolean init(){
+		
+		System.out.println("Reading Dict starting ... ");
+		dict.readDict();
+		return true;
+	}
+}

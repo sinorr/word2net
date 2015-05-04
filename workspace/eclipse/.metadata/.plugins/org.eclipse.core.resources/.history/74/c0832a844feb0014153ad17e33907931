@@ -1,0 +1,32 @@
+package pairup;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+
+public class Distri{
+	
+	HashMap<String, Integer> lemmaCount;
+	HashMap<String,String[]> distri;
+	
+	// Path
+	String tmFile;
+	String wordListFile;
+		
+	/////////////////////////Methods//////////////////////////
+	
+	// Constructor
+	public Distri(Options option){
+		tmFile = option.workPath + option.tmFile;
+		wordListFile = option.workPath + option.wordListFile;
+		lemmaCount = new HashMap<String, Integer>();
+		distri = new HashMap<String,String[]>();
+	}
+	
+	public boolean readWordList(){
+		try{
+			BufferedReader wordListReader = new BufferedReader(new InputStreamReader(new FileInputStream(wordListFile)));
+		}
+	}
+}
