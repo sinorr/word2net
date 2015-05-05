@@ -1,0 +1,23 @@
+package map;
+
+import java.util.HashMap;
+
+public class Wsisense{
+	
+	int size;
+	int high;
+	HashMap<String,Double[]> word2vec;
+	
+	/////////////////Methods//////////////////
+	
+	//Constructor
+	public Wsisense(){
+		
+	}
+	
+	public Double[][] getWsi(String word){
+		
+		return null;
+	}
+	
+}

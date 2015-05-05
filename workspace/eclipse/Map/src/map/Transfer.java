@@ -1,6 +1,5 @@
 package map;
 
-import java.util.HashMap;
 import java.util.Vector;
 
 public class Transfer{
@@ -18,7 +17,12 @@ public class Transfer{
 	//////////////////Methods//////////////////
 	
 	//Constructor
-	public Transfer(){
+	public Transfer(Options option){
+		this.option = option;
+		
+		wsisense = new Wsisense(option);
+		wsisense.readVec();
+		
 		
 	}
 	

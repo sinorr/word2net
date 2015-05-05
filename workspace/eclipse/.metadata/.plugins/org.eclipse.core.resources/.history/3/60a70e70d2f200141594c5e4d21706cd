@@ -1,0 +1,73 @@
+package map;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+
+public class Wsisense{
+	
+	int size;
+	int high;
+	HashMap<String,Double[]> word2vec;
+	
+	String vecFile;
+	String datPath;
+	
+	/////////////////Methods//////////////////
+	
+	//Constructor
+	public Wsisense(Options option){
+		size = option.size;
+		word2vec = new HashMap<String,Double[]>();
+		
+		vecFile = option.workPath + option.vecFile;
+		datPath = option.workPath + option.datPath;
+	}
+	
+	public boolean readVec(){
+		try{
+			BufferedReader vecReader = new BufferedReader(new InputStreamReader(new FileInputStream(vecFile)));
+			String line = vecReader.readLine();
+			try{
+				size = Integer.parseInt(line.substring(line.indexOf(' ')));
+			}catch(Exception e){
+				
+			}
+			
+			int r = 0;
+			line = vecReader.readLine();
+			while(line != null){
+				String words[] = line.split(" ");
+				
+				if (words.length == size + 1){
+					Double [] vec = new Double[size + 1];
+					for (int i = 1; i <= size; i++){
+						vec[i] = Double.parseDouble(words[i]);
+					}
+					word2vec.put(words[0], vec);
+					if ( ++r % 100 == 0){
+						System.out.print('|');
+						if ( r % 10000 == 0)
+							System.out.println();
+					}
+						
+				}
+				line = vecReader.readLine();
+			}
+			
+			vecReader.close();
+			System.out.println("\nRead word2vec successfully!");
+			return true;
+		}catch(Exception e){
+			System.out.println("Error When Read word2vec!" + e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public Double[][] getWsi(String word){
+		
+		return null;
+	}
+	
+}

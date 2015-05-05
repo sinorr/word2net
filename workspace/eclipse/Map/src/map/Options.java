@@ -6,16 +6,16 @@ public class Options{
 	
 	
 	@Option(name = "-workPath", usage = "Specify path of workspace ")
-	public String workPath = "/home/cyno/corpus/large2/";
+	public String workPath = "/home/cyno/data/map/";
 	
-	@Option(name = "-sourceFile", usage = "Specify source corpus ")
-	public String sourceFile = "large2.en";
+	@Option(name = "-vecFile", usage = "Specify source corpus ")
+	public String vecFile = "vectors.txt";
 	
-	@Option(name = "-dictFile", usage = "Specify file of dictionary")
-	public String dictFile = "index.adj";
+	@Option(name = "-datPath", usage = "Specify file of dictionary")
+	public String datPath = "topic_distri/";
 	
-	@Option(name = "-length", usage = "Specify the sum of source lines")
-	public Integer length = 100000;
+	@Option(name = "-size", usage = "Specify the sum of source lines")
+	public Integer size = 200;
 	
 	@Option(name = "-filterLine", usage = "Specify the least sum of words tagged each line")
 	public Integer filterLine = 4;

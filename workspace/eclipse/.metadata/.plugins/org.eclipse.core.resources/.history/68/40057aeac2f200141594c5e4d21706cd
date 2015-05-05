@@ -1,0 +1,41 @@
+package map;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+
+public class Wsisense{
+	
+	int size;
+	int high;
+	HashMap<String,Double[]> word2vec;
+	
+	String datFile;
+	
+	/////////////////Methods//////////////////
+	
+	//Constructor
+	public Wsisense(){
+		
+	}
+	
+	public boolean readDat(){
+		try{
+			BufferedReader datReader = new BufferedReader(new InputStreamReader(new FileInputStream(datFile)));
+			
+			
+			System.out.println("Read wsi data successfully!");
+			return true;
+		}catch(Exception e){
+			System.out.println("Error When Read wsi data!" + e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public Double[][] getWsi(String word){
+		
+		return null;
+	}
+	
+}
