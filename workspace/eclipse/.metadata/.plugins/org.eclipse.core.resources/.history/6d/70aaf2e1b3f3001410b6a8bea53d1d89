@@ -1,0 +1,48 @@
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.AbstractMap;
+
+public class temp{
+	
+	static String filename = "/home/cyno/data/dict/data.adj";
+	
+	public static void main(String args[]){
+		
+		int [] count = new int[4000000];
+		for (int i = 0; i < 4000000; i++)
+			count[i] = 0;
+		
+		try{
+			Double sum = 0.0;
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
+			String line = reader.readLine();
+			int max = 0;
+			int r = 0;
+			while (line != null ){
+				line = line.substring(0,line.indexOf(' '));
+				//System.out.println(line);
+				try{
+					int tmp = Integer.parseInt(line);
+					//System.out.println(++r + ":   " +tmp);
+					count[tmp] += 1;
+					max = max > tmp ? max : tmp;
+					//System.out.println(max);
+				}catch(Exception e){
+					line = reader.readLine();
+					continue;
+				}
+				
+				line = reader.readLine();
+			}
+			
+			AbstractMap<String, Integer>.SimpleEntry<String, Integer>("1",99);
+			for (int i = 0; i < 4000000; i++)
+				if (count[i] > 0)
+					System.out.println(i);
+			reader.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+}

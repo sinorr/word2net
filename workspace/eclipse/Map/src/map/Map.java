@@ -14,5 +14,6 @@ public class Map{
 		}
 		
 		Transfer transfer = new Transfer(option);
+		transfer.transfer();
 	}
 }

@@ -2,4 +2,6 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="java.util.Map.Entry"/>
+<fullyQualifiedTypeName name="java.util.AbstractMap"/>
+<fullyQualifiedTypeName name="java.util.AbstractMap.SimpleEntry"/>
 </qualifiedTypeNameHistroy>

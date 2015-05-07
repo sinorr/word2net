@@ -1,0 +1,177 @@
+package map;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.AbstractMap;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map.Entry;
+
+public class Wnsense{
+	
+	HashSet<String> stops;
+	HashMap<String,Double[]> word2vec;
+	HashMap<String,Integer[]> index;
+	String[] lines;
+	Double[][] id2vec;
+	int[] flag;
+	
+	int size;
+	int length;
+	
+	String vecFile;
+	String indexFile;
+	String dataFile;
+	/////////////////////Methods//////////////////
+	
+	// Constructor
+	public Wnsense(Options option){
+		
+		length = 4000000;
+		
+		vecFile = option.workPath + option.vecFile;
+		indexFile = option.workPath + option.indexFile;
+		dataFile = option.workPath + option.dataFile;
+		
+		word2vec = new HashMap<String,Double[]>();
+		index = new HashMap<String,Integer[]>();
+		
+		id2vec = new Double[length][];
+		lines = new String[length];
+		
+		this.length = option.length;
+		flag = new int[length];
+		for (int i = 0; i < length; i++)
+			flag[i] = 0;
+	}
+	
+	public Double[] getId( int i){
+		if (flag[i] == 1)
+			return id2vec[i];
+		
+		return null;
+	}
+	
+	public boolean readData(){
+		try{
+			BufferedReader dataReader = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile)));
+			String line = dataReader.readLine();
+			
+			while (line != null){
+
+				try{
+					int num = Integer.parseInt(line.substring(0, line.indexOf(' ')));
+					lines[num] = line;
+					//System.out.println(words[0]); /////////////////Debug
+				}catch(Exception e){
+					//System.out.println("Skip :\t" + words[0] + (++rr) );//+ e.getMessage());
+					//e.printStackTrace();
+					line = dataReader.readLine();
+					continue;
+				}
+				
+				line = dataReader.readLine();
+			}
+			
+			
+			dataReader.close();
+			System.out.println("Read index file successfully!");
+			return true;			
+		}catch(Exception e){
+			System.out.println("Error when read index file!" + e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean readIndex(){
+		try{
+			BufferedReader indexReader = new BufferedReader(new InputStreamReader(new FileInputStream(indexFile)));
+			String line = indexReader.readLine();
+			int rr = 0;
+			while (line != null){
+				String words[] = line.split(" ");
+				try{
+					int num = Integer.parseInt(words[2]);
+					Integer[] ids = new Integer[num];
+					for ( int i = words.length - num, r = 0; i < words.length;r ++, i++){
+						ids[r] = Integer.parseInt(words[i]);
+					}
+					index.put(words[0], ids);
+					//System.out.println(words[0]); /////////////////Debug
+				}catch(Exception e){
+					//System.out.println("Skip :\t" + words[0] + (++rr) );//+ e.getMessage());
+					//e.printStackTrace();
+					line = indexReader.readLine();
+					continue;
+				}
+				
+				line = indexReader.readLine();
+			}
+			
+			
+			indexReader.close();
+			System.out.println("Read index file successfully!");
+			return true;			
+		}catch(Exception e){
+			System.out.println("Error when read index file!" + e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public Entry<Integer[], Double[][]> getWn(String word) {
+		
+		Integer[] ids = index.get(word);
+		Double[][] wn = new Double[ids.length][size];
+		setidvec(ids,wn);
+		
+		return (new AbstractMap.SimpleEntry<Integer[],Double[][]>(ids,wn));
+	}
+	
+	public void setidvec(Integer[] ids, Double[][] wn){
+		
+	}
+	public boolean readVec(){
+		try{
+			BufferedReader vecReader = new BufferedReader(new InputStreamReader(new FileInputStream(vecFile)));
+			String line = vecReader.readLine();
+			try{
+				size = Integer.parseInt(line.substring(line.indexOf(' ') + 1));
+			}catch(Exception e){
+				
+			}
+			
+			int r = 0;
+			line = vecReader.readLine();
+			while(line != null){
+				String words[] = line.split(" ");
+				
+				if (words.length == size + 1){
+					Double [] vec = new Double[size + 1];
+					for (int i = 0; i < size; i++){
+						vec[i] = Double.parseDouble(words[i+1]);
+					}
+					word2vec.put(words[0], vec);
+					if ( ++r % 100 == 0){
+						System.out.print('|');
+						if ( r % 10000 == 0)
+							System.out.println();
+					}
+						
+				}
+				line = vecReader.readLine();
+			}
+			
+			vecReader.close();
+			System.out.println("\nRead word2vec successfully!");
+			return true;
+		}catch(Exception e){
+			System.out.println("Error When Read word2vec!" + e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+}

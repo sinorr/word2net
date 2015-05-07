@@ -1,0 +1,44 @@
+package map;
+
+import java.util.Map.Entry;
+
+public class Word{
+	
+	String word;
+	Double[][] matrix;
+	int high;
+	int width;
+	
+	
+	Double[][] wsi;
+	Integer[] senseid;
+	Double[][] wn;
+	
+	////////////////////Methods////////////////////
+	
+	// Constructor
+	public Word(String word){
+		this.word = word;
+	}
+	
+	public void setWsi(Double[][] wsi){
+		this.wsi = wsi;
+		this.high = wsi.length;
+	}
+	
+	public void setWn(Entry<Integer[],Double[][]> wn){
+		this.wn = wn.getValue();
+		this.senseid = wn.getKey();
+		this.width = senseid.length;
+	}
+	
+	public void comDistence(){
+		
+	}
+	
+	public boolean saveMatrix(){
+		
+		
+		return true;
+	}
+}

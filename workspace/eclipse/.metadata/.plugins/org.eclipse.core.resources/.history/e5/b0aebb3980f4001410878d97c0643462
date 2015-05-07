@@ -1,0 +1,51 @@
+package map;
+
+import java.util.Vector;
+
+public class Transfer{
+	
+	Options option;
+	String workPath;
+	
+	
+	int size;
+	
+	Vector<String> wordList;
+	Wnsense wnsense;
+	Wsisense wsisense;
+	
+	//////////////////Methods//////////////////
+	
+	//Constructor
+	public Transfer(Options option){
+		this.option = option;
+		
+		wsisense = new Wsisense(option);
+		wsisense.readVec();
+		
+		wnsense = new Wnsense(option);
+		wnsense.readIndex();
+		wnsense.readVec();
+		
+	}
+	
+	
+	public boolean transfer(){
+		
+		for (int i = 0; i < wordList.size(); i++){
+			String word = wordList.get(i);
+			Word one = new Word();
+			
+			one.setWsi(wsisense.getWsi(word));
+			one.setWn(wnsense.getWn(word));
+			one.comDistence();
+			one.saveMatrix();		
+			
+		}
+		
+		
+		
+		return true;
+	}
+	
+}

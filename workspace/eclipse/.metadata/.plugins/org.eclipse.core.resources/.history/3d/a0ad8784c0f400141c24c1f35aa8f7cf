@@ -1,0 +1,69 @@
+package map;
+
+import java.util.Map.Entry;
+
+public class Word{
+	
+	String word;
+	String mapPath;
+	Double[][] matrix;
+	int high;
+	int width;
+	int size;
+	
+	
+	Double[][] wsi;
+	Integer[] senseid;
+	Double[][] wn;
+	
+	////////////////////Methods////////////////////
+	
+	// Constructor
+	public Word(String word, Options option){
+		this.word = word;
+		this.mapPath = option.workPath + "mapFile/";
+		this.size = option.size;
+	}
+	
+	public void setWsi(Double[][] wsi){
+		this.wsi = wsi;
+		this.high = wsi.length;
+		//this.size = wsi[0].length;
+	}
+	
+	public void setWn(Entry<Integer[],Double[][]> wn){
+		this.wn = wn.getValue();
+		this.senseid = wn.getKey();
+		this.width = senseid.length;
+	}
+	
+	public void comDistri(){
+		matrix = new Double[high][width];
+		for (int i = 0; i < high; i++)
+			for (int j = 0; j < width; j++)
+				matrix[i][j] = comDistance(i,j);
+		
+	}
+	
+	public Double comDistance(int i, int j){
+		Double ans = 0.0;
+		for (int r = 0; r < size; r++){
+			ans += wsi[i][r] * wn[j][r];
+		}
+		return ans;
+	}
+	
+	public boolean saveMatrix(){
+
+		try{
+			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream()))
+		}
+		for (int i = 0; i < high; i++){
+			for (int j = 0; j < width; j++)
+				System.out.print(matrix[i][j] + "\t");
+			System.out.println();
+		}
+			
+		return true;
+	}
+}

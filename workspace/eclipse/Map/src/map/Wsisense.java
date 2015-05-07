@@ -47,9 +47,9 @@ public class Wsisense{
 					}
 					word2vec.put(words[0], vec);
 					if ( ++r % 100 == 0){
-						System.out.print('|');
-						if ( r % 10000 == 0)
-							System.out.println();
+						//System.out.print('|');
+						//if ( r % 10000 == 0)
+							//System.out.println();
 					}
 						
 				}
@@ -57,7 +57,7 @@ public class Wsisense{
 			}
 			
 			vecReader.close();
-			System.out.println("\nRead word2vec successfully!");
+			System.out.println("Read word2vec successfully!");
 			return true;
 		}catch(Exception e){
 			System.out.println("Error When Read word2vec!" + e.getMessage());
